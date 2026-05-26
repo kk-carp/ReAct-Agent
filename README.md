@@ -1,16 +1,8 @@
-# 第2章：ReAct Agent 实战
+# ReAct Agent 项目
 
 ## 可查天气、算数据、读文档的 ReAct Agent
 
 > **技术栈：** LangGraph + LangChain + DeepSeek API
-
----
-
-1. **理解 ReAct 框架**：Thought → Action → Observation 推理循环原理
-2. **掌握 LangGraph**：用 StateGraph 手动构建 Agent 图，理解节点、边、路由的概念
-3. **编写 LangChain 工具**：用 `@tool` 装饰器封装任意 Python 函数为 LLM 可调用工具
-4. **对接 DeepSeek API**：使用 DeepSeek-Chat 模型作为 Agent 的推理引擎
-5. **调试 Agent 行为**：观察实时推理链，理解 LLM 的决策过程
 
 ---
 
