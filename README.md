@@ -110,35 +110,6 @@ python main.py
         └────────────→ llm_think 节点（循环）
 ```
 
-### LangGraph 关键代码
-
-```python
-# 1. 定义状态（State）
-class AgentState(TypedDict):
-    messages: Annotated[list[BaseMessage], add_messages]
-
-# 2. 定义节点（Node）
-def llm_think_node(state: AgentState) -> AgentState:
-    response = llm_with_tools.invoke(state["messages"])
-    return {"messages": [response]}
-
-# 3. 定义路由（Conditional Edge）
-def should_continue(state) -> Literal["tools7", "end"]:
-    last_msg = state["messages"][-1]
-    if last_msg.tool_calls:
-        return "tools7"
-    return "end"
-
-# 4. 构建图
-graph = StateGraph(AgentState)
-graph.add_node("llm_think", llm_think_node)
-graph.add_node("tools7", ToolNode(ALL_TOOLS))
-graph.add_conditional_edges("llm_think", should_continue)
-graph.add_edge("tools7", "llm_think")
-```
-
----
-
 ## 🛠️ 工具说明
 
 ### 1. 天气工具 `get_weather(city)`
@@ -185,11 +156,4 @@ graph.add_edge("tools7", "llm_think")
 查看产品手册，X1 服务器的 GPU 型号和显存是什么？
 产品手册里有几种服务器型号？分别多少钱？
 读取文档，专业版向量数据库每月多少钱？
-```
-
-**多工具组合：**
-
-```
-上海现在多少度？如果要维持室温 22 度，需要升温多少度？
-查文档，买一台 X2 服务器，5年总成本（含年维保）是多少？
 ```
